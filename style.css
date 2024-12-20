@@ -1,0 +1,186 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #ffffff;
+    color: #000000;
+}
+
+.main-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    background-color: #ffffff;
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.menu-icon {
+    cursor: pointer;
+}
+
+.menu-icon .bar {
+    width: 30px;
+    height: 4px;
+    background-color: #000000;
+    margin: 5px 0;
+    transition: 0.3s;
+}
+
+.side-menu {
+    position: fixed;
+    top: 0;
+    left: -250px;
+    width: 250px;
+    height: 100%;
+    background-color: #f4f4f4;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    transition: 0.3s;
+    padding-top: 60px;
+    z-index: 999;
+}
+
+.side-menu.visible {
+    left: 0;
+}
+
+.side-menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.side-menu ul li {
+    padding: 15px 0;
+    text-align: center;
+}
+
+.side-menu ul li a {
+    text-decoration: none;
+    color: #000000;
+    font-weight: bold;
+    display: block;
+    border-radius: 8px;
+    line-height: 2;
+    margin-left: 4%;
+    margin-right: 4%;
+}
+
+.side-menu ul li a:hover,
+.side-menu ul li a.active {
+    background-color: #f4f4f4;
+    border-radius: 8px;
+}
+
+.side-menu ul li .submenu {
+    display: block;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    background-color: #ddd;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    max-height: 0; /* Начальная высота подменю - скрыто */
+    opacity: 0; /* Начальная прозрачность - скрыто */
+    overflow: hidden; /* Скрытие содержимого */
+    transition: max-height 0.3s ease-out; /* Плавное изменение высоты и прозрачности */
+}
+
+.side-menu ul li:hover .submenu {
+    max-height: 500px; /* Устанавливаем максимальную высоту для подменю */
+    opacity: 1; /* Устанавливаем полную непрозрачность */
+}
+
+/* Подсветка пунктов подменю */
+.submenu li a {
+    padding: 10px;
+    text-align: left;
+    color: #000000;
+    font-weight: normal;
+}
+
+.submenu li a:hover {
+    background-color: #f4f4f4;
+}
+
+/* Подсветка для пункта Syntax, когда курсор находится в подменю */
+.side-menu ul li:hover > a,
+.side-menu ul li .submenu li a:hover {
+    background-color: #f4f4f4;
+}
+
+.side-menu ul li:hover > a {
+    background-color: #ddd;
+}
+
+#syntax {
+    text-decoration: none;
+    color: #000000;
+    font-weight: bold;
+    display: block;
+    border-radius: 8px;
+    line-height: 2;
+    margin: 0%;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.main-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    text-align: center;
+}
+
+.main-title {
+    font-size: 4em;
+    font-weight: bold;
+    white-space: nowrap;
+    border-right: .15em solid orange;
+    font-family: "Space Mono";
+    overflow: hidden;
+    width: 0;
+    animation: typing 1s steps(10, end) forwards, remove-cursor 0.3s 1.5s forwards;
+    animation-fill-mode: forwards;
+}
+
+.subtitle {
+    font-size: 1.5em;
+    margin-top: 10px;
+    opacity: 0;
+    animation: fade-in 1.5s ease 6s forwards;
+    animation-delay: 0s;
+}
+
+@keyframes typing {
+    from {
+        width: 0;
+    }
+    to {
+        width: 16%;
+    }
+}
+
+@keyframes fade-in {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes remove-cursor {
+    0% {
+        border-right: .15em solid orange;
+    }
+    100% {
+        border-right: none;
+    }
+}
