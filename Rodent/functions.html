@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Article Page</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background: #fff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            position: relative;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            color: #444;
+        }
+
+        h2 {
+            font-size: 1.8em;
+            margin-top: 20px;
+            color: #555;
+        }
+
+        h3 {
+            font-size: 1.5em;
+            margin-top: 15px;
+            color: #666;
+        }
+
+        p {
+            margin-bottom: 15px;
+        }
+
+        a {
+            color: #007BFF;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        blockquote {
+            margin: 20px 0;
+            padding: 10px 20px;
+            background: #f1f1f1;
+            border-left: 5px solid #ccc;
+            font-style: italic;
+        }
+
+        ul {
+            margin: 20px 0;
+            padding-left: 40px;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        pre {
+            background: #f4f4f4;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+
+        .back-button {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            padding: 10px 20px;
+            background-color: #333;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 1em;
+            cursor: pointer;
+            text-decoration: none;
+            transition: 0.7s;
+        }
+
+        .back-button:hover {
+            background-color: #555;
+            color: #ccc;
+            text-decoration: none;
+        }
+
+        .toc {
+            position: fixed;
+            right: 10px;
+            top: 60px;
+            background: #fff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            max-width: 300px;
+        }
+
+        .toc h3 {
+            margin: 0 0 10px;
+            font-size: 1.4em;
+            color: #333;
+        }
+
+        .toc a {
+            display: block;
+            margin-bottom: 10px;
+            color: #333;
+            text-decoration: none;
+            font-size: 1em;
+        }
+
+        .toc a.active {
+            font-weight: bold;
+            color: #000;
+        }
+
+        .toc a:hover {
+            text-decoration: underline;
+        }
+
+    </style>
+</head>
+<body>
+    <a href="index.html" class="back-button">← Назад</a>
+
+    <div class="container">
+        <h1>Функции</h1>
+
+        <h2 id="function-declaration">Объявление функций</h2>
+        <p>Общий вид объявления функции:</p>
+        <pre><code>func a(<args>) -> type {
+    body();
+    
+    return value; // if not void
+}</code></pre>
+
+        <p>Примеры:</p>
+        <pre><code>func array_sum(array<int> a, int size) -> int {
+  int result = 0;
+  for (int i = 0; i < size; ++i){
+    result += a[i];
+  }
+  return result;
+}
+
+func f() -> double {
+    return 0.1 + 0.2;
+}
+
+func f(double e) -> void {
+    int a = 1;
+    double c = a + e;
+}</code></pre>
+
+        <h2 id="function-call">Вызов функции</h2>
+        <p>Общий вид вызова функции:</p>
+        <pre><code>type a = function_with_return_type_same_as_variable_a(1, 2, 3);
+type b = function_with_return_type_same_as_variable_b();
+
+void_function(0);</code></pre>
+
+        <p>Примеры:</p>
+        <pre><code>array<int> a = [1, 6, 23, -2];
+int arr_sum = array_sum(a, 4);
+
+str string = "Rodent is the best language";
+reverse_string(string);</code></pre>
+    </div>
+
+    <div class="toc">
+        <h3>Содержание</h3>
+        <a href="#function-declaration" class="toc-link">Объявление функций</a>
+        <a href="#function-call" class="toc-link">Вызов функции</a>
+    </div>
+</body>
+</html>

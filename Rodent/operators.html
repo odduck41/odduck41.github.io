@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Article Page</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background: #fff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            position: relative;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            color: #444;
+        }
+
+        h2 {
+            font-size: 1.8em;
+            margin-top: 20px;
+            color: #555;
+        }
+
+        h3 {
+            font-size: 1.5em;
+            margin-top: 15px;
+            color: #666;
+        }
+
+        p {
+            margin-bottom: 15px;
+        }
+
+        a {
+            color: #007BFF;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        blockquote {
+            margin: 20px 0;
+            padding: 10px 20px;
+            background: #f1f1f1;
+            border-left: 5px solid #ccc;
+            font-style: italic;
+        }
+
+        ul {
+            margin: 20px 0;
+            padding-left: 40px;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        pre {
+            background: #f4f4f4;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+
+        .back-button {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            padding: 10px 20px;
+            background-color: #333;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 1em;
+            cursor: pointer;
+            text-decoration: none;
+            transition: 0.7s;
+        }
+
+        .back-button:hover {
+            background-color: #555;
+            color: #ccc;
+            text-decoration: none;
+        }
+
+        .toc {
+            position: fixed;
+            right: 10px;
+            top: 60px;
+            background: #fff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            max-width: 300px;
+        }
+
+        .toc h3 {
+            margin: 0 0 10px;
+            font-size: 1.4em;
+            color: #333;
+        }
+
+        .toc a {
+            display: block;
+            margin-bottom: 10px;
+            color: #333;
+            text-decoration: none;
+            font-size: 1em;
+        }
+
+        .toc a.active {
+            font-weight: bold;
+            color: #000;
+        }
+
+        .toc a:hover {
+            text-decoration: underline;
+        }
+
+    </style>
+</head>
+<body>
+    <a href="index.html" class="back-button">← Назад</a>
+
+    <div class="container">
+        <h1>Управляющие конструкции</h1>
+
+        <h2 id="if-statement">Условный оператор <code>if</code></h2>
+        <p>Общий вид оператора <code>if</code>:</p>
+        <pre><code>if (condition_1){
+    body_1();
+} else if (condition_2) {
+    body_2();
+} elif (condition_3) {
+    body_3();
+} else {
+    body4();
+}</code></pre>
+
+        <p>Пример:</p>
+        <pre><code>bool a = false;
+bool b = true;
+bool c = false;
+
+if (a){
+    a = false;
+} else if (b == true) {
+    a = true;
+} elif (!c) {
+    c = !c;
+} else {
+    a = false;
+    b = false;
+    c = false;
+}</code></pre>
+
+        <h2 id="switch-statement">Условный оператор <code>switch</code></h2>
+        <p>Общий вид оператора <code>switch</code>:</p>
+        <pre><code>switch (a) {
+case 1:
+    code_1();
+    break;
+case 2:
+    code_2();
+    break;
+default:
+    code_default();
+}</code></pre>
+
+        <p>Пример:</p>
+        <pre><code>int a = 9;
+
+switch (a) {
+case 4:
+    code_if_8();
+    break;
+case 8:
+    code_if_8();
+    break;
+default:
+    code_else();
+}</code></pre>
+    </div>
+
+    <div class="toc">
+        <h3>Содержание</h3>
+        <a href="#if-statement" class="toc-link">Условный оператор if</a>
+        <a href="#switch-statement" class="toc-link">Условный оператор switch</a>
+    </div>
+</body>
+</html>
