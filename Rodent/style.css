@@ -74,6 +74,7 @@ body {
 .side-menu ul li a.active {
     background-color: #f4f4f4;
     border-radius: 8px;
+    
 }
 
 .side-menu ul li .submenu {
@@ -85,14 +86,15 @@ body {
     border-bottom-left-radius: 8px;
     border-bottom-right-radius: 8px;
     max-height: 0; /* Начальная высота подменю - скрыто */
-    opacity: 0; /* Начальная прозрачность - скрыто */
+    /* opacity: 0; Начальная прозрачность - скрыто */
     overflow: hidden; /* Скрытие содержимого */
-    transition: max-height 0.3s ease-out; /* Плавное изменение высоты и прозрачности */
+    transition: max-height 0.3s ease-out, opacity 0.3s ease-out; /* Плавное изменение высоты и прозрачности */
 }
 
 .side-menu ul li:hover .submenu {
     max-height: 500px; /* Устанавливаем максимальную высоту для подменю */
-    opacity: 1; /* Устанавливаем полную непрозрачность */
+    /* opacity: 1; Устанавливаем полную непрозрачность */
+    transition: max-height 0.3s ease-out, opacity 0.3s ease-out; 
 }
 
 /* Подсветка пунктов подменю */
@@ -101,10 +103,15 @@ body {
     text-align: left;
     color: #000000;
     font-weight: normal;
+
+    background: linear-gradient(to left, #ddd 50%,  #f4f4f4 50%) right;
+    background-size: 200%;
+    transition: .2s ease-out;
 }
 
 .submenu li a:hover {
-    background-color: #f4f4f4;
+    background-position: left;
+    /* background-color: #f4f4f4; */
 }
 
 /* Подсветка для пункта Syntax, когда курсор находится в подменю */
@@ -115,9 +122,14 @@ body {
 
 .side-menu ul li:hover > a {
     background-color: #ddd;
+    transition: background-color 0s ease-in-out; /* Smooth transition */
 }
 
-#syntax {
+.side-menu ul li > a {
+    transition: background-color 0.52s ease-in-out; /* Adds reverse smooth transition */
+}
+
+#developer {
     text-decoration: none;
     color: #000000;
     font-weight: bold;
