@@ -180,7 +180,7 @@
   if(!gl)return;
   window.addEventListener('resize',gl.rs);
   function loop(){
-    if(!document.hidden)gl.draw();
+    if(!document.hidden && !host.hidden)gl.draw();
     requestAnimationFrame(loop);
   }
   requestAnimationFrame(loop);

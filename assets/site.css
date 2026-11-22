@@ -13,14 +13,12 @@
 html{scroll-padding-top:env(safe-area-inset-top,0px)}
 html.is-home,html.is-home body{height:100%;overflow:hidden;overscroll-behavior:none;touch-action:none}
 body{margin:0;background:var(--bg);color:var(--fg);font:400 1.0625rem/1.65 Manrope,system-ui,-apple-system,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}
-body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--bg);z-index:10}
 a{color:inherit}
 :focus-visible{outline:2px solid var(--fg);outline-offset:4px;border-radius:6px}
 
 /* top bar: same on every page */
 .bar{position:fixed;top:0;left:0;right:0;z-index:20;display:flex;justify-content:space-between;align-items:center;gap:12px;padding:calc(16px + env(safe-area-inset-top,0px)) clamp(16px,4vw,48px) 14px}
-html:not(.is-home) .bar{background:var(--bg)}
-.bar nav{position:relative;display:flex;isolation:isolate;padding:4px;border:1px solid #ffffff42;border-radius:18px;background:linear-gradient(145deg,#49494d99,#18181dcc);backdrop-filter:blur(20px) saturate(1.35);-webkit-backdrop-filter:blur(20px) saturate(1.35);box-shadow:inset 0 1px #ffffff26,0 4px 18px #0002}
+.bar nav{position:relative;display:flex;isolation:isolate;padding:4px;border:1px solid #ffffff65;border-radius:18px;background:linear-gradient(145deg,#ffffff42,#edf3ff27);backdrop-filter:blur(18px) saturate(1.2);-webkit-backdrop-filter:blur(18px) saturate(1.2);box-shadow:inset 0 1px #ffffff26,0 4px 18px #0002}
 .bar nav a{position:relative;text-decoration:none;font-weight:500;white-space:nowrap;font-size:.96rem;padding:9px 16px;color:white;mix-blend-mode:difference}
 .bar nav a:hover{background:#ffffff15;border-radius:12px}
 .bar nav a:focus-visible{outline-color:white;outline-offset:-3px}
@@ -95,3 +93,17 @@ html[lang="ru"] .language::before{transform:translateX(100%)}
   .bar nav a{padding:6px clamp(4px,1.35vw,8px);font-size:clamp(.65rem,2.4vw,.8rem)}
   .language{margin-left:auto}
 }
+
+[hidden]{display:none!important}
+
+@media (prefers-color-scheme:light){html:not(.is-home) .bar nav{background:linear-gradient(145deg,#ffffffb0,#edf3ff55);border-color:#b7c0cc77}html:not(.is-home) .bar nav a{color:#20242b;mix-blend-mode:normal}}
+
+.bar nav{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));width:min(39rem,calc(100% - 6rem))}
+.bar nav a{text-align:center;padding-inline:2px}
+@media(max-width:560px){.bar nav{width:100%}.bar{align-items:flex-start}.language{margin-left:auto}}
+
+ol.tl li.passed::before{background:var(--fg)}
+ol.tl li.ripple::after{content:"";position:absolute;left:-34px;top:.62em;width:11px;height:11px;border:1px solid white;border-radius:50%;pointer-events:none;animation:milestone-wave .55s ease-out forwards}
+ol.tl li:first-child::before{transform:scale(1.6)}
+@keyframes milestone-wave{from{transform:scale(1);opacity:.8}to{transform:scale(3.2);opacity:0}}
+@media(prefers-reduced-motion:reduce){ol.tl li.ripple::after{display:none}}

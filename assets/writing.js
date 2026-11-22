@@ -1,7 +1,8 @@
+const sectionURL = new URL('../writing/', import.meta.url);
 const list = document.querySelector('#articles');
 const error = document.querySelector('#load-error');
 async function loadArticle(path) {
-  const url = new URL('../' + path.split('/').map(encodeURIComponent).join('/'), location.href);
+  const url = new URL('../' + path.split('/').map(encodeURIComponent).join('/'), sectionURL);
   const response = await fetch(url);
   if (!response.ok) throw new Error(response.statusText);
   const html = new DOMParser().parseFromString(await response.text(), 'text/html');
@@ -14,8 +15,8 @@ async function loadArticle(path) {
 }
 try {
   // GitHub Pages builds the catalog. Plain static servers use the JSON manifest.
-  let response = await fetch('./discovered.json');
-  if (response.status === 404) response = await fetch('./files.json');
+  let response = await fetch(new URL('discovered.json',sectionURL));
+  if (response.status === 404) response = await fetch(new URL('files.json',sectionURL));
   if (!response.ok) throw new Error(response.statusText);
   const files = await response.json();
   const articles = await Promise.allSettled(files.map(loadArticle));
