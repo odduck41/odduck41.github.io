@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Card — Löva</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/site.css">
+</head>
+<body>
+<header class="bar">
+  <a class="mark" href="../">Löva</a>
+  <nav aria-label="Pages">
+    <a href="../card/" aria-current="page">Card</a>
+    <a href="../resume/">Resume</a>
+    <a href="../writing/">Writing</a>
+  </nav>
+</header>
+<main class="page">
+<h1>Card</h1>
+    <p class="sub">Tap the card to turn it over.</p>
+    <div class="stage">
+      <button class="card-toggle" type="button" aria-label="Show contact details" aria-pressed="false" aria-controls="cardEl"></button>
+      <div class="card" id="cardEl">
+        <div class="face front">
+          <div>
+            <p class="name">Löva</p>
+            <p class="roles">Mathematician. Astrophysicist. Programmer.<br>MSU Faculty of Space Research</p>
+          </div>
+          <svg viewBox="0 0 300 200" fill="none" stroke="currentColor" aria-hidden="true">
+            <ellipse cx="170" cy="120" rx="130" ry="16" stroke-width="1.2" opacity=".5"/>
+            <circle cx="170" cy="120" r="52" stroke-width="1.4" opacity=".35"/>
+            <circle cx="170" cy="120" r="40" fill="var(--panel)" stroke-width="2"/>
+            <path d="M40 120 Q170 140 300 120" stroke-width="1.6"/>
+          </svg>
+        </div>
+        <div class="face back" inert>
+          <p class="name" style="font-size:1.5rem">Say hello</p>
+          <ul>
+            <li><span>Email</span><a href="mailto:name@example.com">name@example.com</a></li>
+            <li><span>Telegram</span><a href="https://t.me/your_handle">t.me/your_handle</a></li>
+            <li><span>GitHub</span><a href="https://github.com/your-handle">github.com/your-handle</a></li>
+            <li><span>Codeforces</span><a href="https://codeforces.com/profile/your-handle">codeforces.com/your-handle</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+</main>
+<script src="../assets/card.js"></script>
+</body>
+</html>

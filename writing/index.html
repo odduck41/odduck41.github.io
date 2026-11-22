@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Writing — Löva</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/site.css">
+</head>
+<body>
+<header class="bar">
+  <a class="mark" href="../">Löva</a>
+  <nav aria-label="Pages">
+    <a href="../card/">Card</a>
+    <a href="../resume/">Resume</a>
+    <a href="../writing/" aria-current="page">Writing</a>
+  </nav>
+</header>
+<main class="page">
+  <h1>Writing</h1>
+  <ul class="posts" id="articles"></ul>
+  <p id="load-error" hidden>Couldn’t load the article list. Please refresh to try again.</p>
+</main>
+<script type="module" src="../assets/writing.js"></script>
+</body>
+</html>

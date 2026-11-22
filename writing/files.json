@@ -1,0 +1,17 @@
+---
+layout: null
+---
+{%- assign entries = site.static_files | concat: site.pages | sort: "path" -%}
+[
+{%- assign first = true -%}
+{%- for entry in entries -%}
+  {%- assign path = entry.path | prepend: "/" | replace: "//", "/" -%}
+  {%- assign folder = path | slice: 0, 10 -%}
+  {%- assign ext = path | slice: -5, 5 | downcase -%}
+  {%- if folder == "/articles/" and ext == ".html" -%}
+    {%- unless first -%},{%- endunless -%}
+    {{- path | remove_first: "/" | jsonify -}}
+    {%- assign first = false -%}
+  {%- endif -%}
+{%- endfor -%}
+]
