@@ -1,9 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<link rel="preload" href="../assets/language.js" as="script">
+<script>try { if (localStorage.getItem('site-language') === 'ru') document.documentElement.classList.add('ru-pending'); } catch {}</script>
+<style>.ru-pending [data-ru]{visibility:hidden}</style>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Writing — Löva</title>
+<title data-ru="Статьи — Löva">Articles — Löva</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
@@ -11,18 +14,25 @@
 </head>
 <body>
 <header class="bar">
-  <a class="mark" href="../">Löva</a>
-  <nav aria-label="Pages">
-    <a href="../card/">Card</a>
-    <a href="../resume/">Resume</a>
-    <a href="../writing/" aria-current="page">Writing</a>
+  <nav aria-label="Pages" data-ru-label="Разделы">
+    <i class="nav-selection" aria-hidden="true"></i>
+    <a href="../"><span data-ru="Главная">Home</span></a>
+    <a href="../card/"><span data-ru="Визитка">Card</span></a>
+    <a href="../about/"><span data-ru="Обо мне">About Me</span></a>
+    <a href="../resume/"><span data-ru="Резюме">Résumé</span></a>
+    <a href="../writing/" aria-current="page"><span data-ru="Статьи">Articles</span></a>
   </nav>
+  <div class="language" role="group" aria-label="Language" data-ru-label="Язык" hidden>
+    <button type="button" lang="en" data-language="en" aria-pressed="true">EN</button>
+    <button type="button" lang="ru" data-language="ru" aria-pressed="false">RU</button>
+  </div>
 </header>
 <main class="page">
-  <h1>Writing</h1>
+  <h1 data-ru="Статьи">Articles</h1>
   <ul class="posts" id="articles"></ul>
-  <p id="load-error" hidden>Couldn’t load the article list. Please refresh to try again.</p>
+  <p id="load-error" hidden data-ru="Не удалось загрузить список статей. Попробуй обновить страницу.">Couldn’t load the article list. Please refresh to try again.</p>
 </main>
 <script type="module" src="../assets/writing.js"></script>
+<script src="../assets/language.js"></script>
 </body>
 </html>

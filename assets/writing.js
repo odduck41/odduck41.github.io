@@ -13,7 +13,9 @@ async function loadArticle(path) {
   return row;
 }
 try {
-  const response = await fetch('./files.json');
+  // GitHub Pages builds the catalog. Plain static servers use the JSON manifest.
+  let response = await fetch('./discovered.json');
+  if (response.status === 404) response = await fetch('./files.json');
   if (!response.ok) throw new Error(response.statusText);
   const files = await response.json();
   const articles = await Promise.allSettled(files.map(loadArticle));

@@ -1,9 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<link rel="preload" href="../assets/language.js" as="script">
+<script>try { if (localStorage.getItem('site-language') === 'ru') document.documentElement.classList.add('ru-pending'); } catch {}</script>
+<style>.ru-pending [data-ru]{visibility:hidden}</style>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Card — Löva</title>
+<title data-ru="Визитка — Löva">Card — Löva</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
@@ -11,23 +14,29 @@
 </head>
 <body>
 <header class="bar">
-  <a class="mark" href="../">Löva</a>
-  <nav aria-label="Pages">
-    <a href="../card/" aria-current="page">Card</a>
-    <a href="../resume/">Resume</a>
-    <a href="../writing/">Writing</a>
+  <nav aria-label="Pages" data-ru-label="Разделы">
+    <i class="nav-selection" aria-hidden="true"></i>
+    <a href="../"><span data-ru="Главная">Home</span></a>
+    <a href="../card/" aria-current="page"><span data-ru="Визитка">Card</span></a>
+    <a href="../about/"><span data-ru="Обо мне">About Me</span></a>
+    <a href="../resume/"><span data-ru="Резюме">Résumé</span></a>
+    <a href="../writing/"><span data-ru="Статьи">Articles</span></a>
   </nav>
+  <div class="language" role="group" aria-label="Language" data-ru-label="Язык" hidden>
+    <button type="button" lang="en" data-language="en" aria-pressed="true">EN</button>
+    <button type="button" lang="ru" data-language="ru" aria-pressed="false">RU</button>
+  </div>
 </header>
 <main class="page">
-<h1>Card</h1>
-    <p class="sub">Tap the card to turn it over.</p>
+<h1 data-ru="Визитка">Card</h1>
+    <p class="sub" data-ru="Наведи курсор или коснись карточки, чтобы увидеть контакты.">Hover or tap to see my contacts.</p>
     <div class="stage">
-      <button class="card-toggle" type="button" aria-label="Show contact details" aria-pressed="false" aria-controls="cardEl"></button>
+      <button class="card-toggle" type="button" aria-label="Show contact details" data-ru-label="Показать контакты" aria-pressed="false" aria-controls="cardEl"></button>
       <div class="card" id="cardEl">
         <div class="face front">
           <div>
             <p class="name">Löva</p>
-            <p class="roles">Mathematician. Astrophysicist. Programmer.<br>MSU Faculty of Space Research</p>
+            <p class="roles"><span data-ru="Математик. Астрофизик. Программист.">Mathematician. Astrophysicist. Programmer.</span><br><span data-ru="Факультет космических исследований МГУ">MSU Faculty of Space Research</span></p>
           </div>
           <svg viewBox="0 0 300 200" fill="none" stroke="currentColor" aria-hidden="true">
             <ellipse cx="170" cy="120" rx="130" ry="16" stroke-width="1.2" opacity=".5"/>
@@ -37,17 +46,17 @@
           </svg>
         </div>
         <div class="face back" inert>
-          <p class="name" style="font-size:1.5rem">Say hello</p>
+          <p class="name" style="font-size:1.5rem" data-ru="Контакты">Say hello</p>
           <ul>
-            <li><span>Email</span><a href="mailto:name@example.com">name@example.com</a></li>
-            <li><span>Telegram</span><a href="https://t.me/your_handle">t.me/your_handle</a></li>
-            <li><span>GitHub</span><a href="https://github.com/your-handle">github.com/your-handle</a></li>
-            <li><span>Codeforces</span><a href="https://codeforces.com/profile/your-handle">codeforces.com/your-handle</a></li>
+            <li><span class="contact-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="5" width="19" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg><span data-ru="Почта">Email</span></span><a href="mailto:gd.cats.creators@gmail.com">gd.cats.creators@gmail.com</a></li>
+            <li><span class="contact-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 3 2 11l7 3 3 7 10-18Z"/><path d="m9 14 6-5"/></svg><span>Telegram</span></span><a href="https://t.me/odduck41">@odduck41</a></li>
+            <li><span class="contact-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 19c-4.1 1-4.1-2-5.8-2.5M15 22v-3.1a2.7 2.7 0 0 0-.8-2.1c2.6-.3 5.3-1.3 5.3-5.8a4.5 4.5 0 0 0-1.2-3.1 4.1 4.1 0 0 0-.1-3.1s-1-.3-3.2 1.2a10.5 10.5 0 0 0-6 0C6.8 4.5 5.8 4.8 5.8 4.8a4.1 4.1 0 0 0-.1 3.1A4.5 4.5 0 0 0 4.5 11c0 4.5 2.7 5.5 5.3 5.8a2.7 2.7 0 0 0-.8 2.1V22"/></svg><span>GitHub</span></span><a href="https://github.com/odduck41">github.com/odduck41</a></li>
           </ul>
         </div>
       </div>
     </div>
 </main>
 <script src="../assets/card.js"></script>
+<script src="../assets/language.js"></script>
 </body>
 </html>

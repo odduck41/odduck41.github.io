@@ -1,38 +1,45 @@
 <!DOCTYPE html>
 <html lang="en" class="is-home">
 <head>
+<link rel="preload" href="assets/language.js" as="script">
+<script>try { if (localStorage.getItem('site-language') === 'ru') document.documentElement.classList.add('ru-pending'); } catch {}</script>
+<style>.ru-pending [data-ru]{visibility:hidden}</style>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Löva — Mathematician. Astrophysicist. Programmer.</title>
+<title data-ru="Löva — Математик. Астрофизик. Программист.">Löva — Mathematician. Astrophysicist. Programmer.</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/site.css">
 <script>
 const section = location.hash.slice(1);
-if (['card', 'resume', 'writing'].includes(section)) location.replace(section + '/' + location.search);
+if (['card', 'about', 'resume', 'writing'].includes(section)) location.replace(section + '/' + location.search);
 </script>
 </head>
 <body>
 <header class="bar">
-  <a class="mark" href="./" aria-current="page">Löva</a>
-  <nav aria-label="Pages">
-    <a href="card/">Card</a>
-    <a href="resume/">Resume</a>
-    <a href="writing/">Writing</a>
+  <nav aria-label="Pages" data-ru-label="Разделы">
+    <i class="nav-selection" aria-hidden="true"></i>
+    <a href="./" aria-current="page"><span data-ru="Главная">Home</span></a>
+    <a href="card/"><span data-ru="Визитка">Card</span></a>
+    <a href="about/"><span data-ru="Обо мне">About Me</span></a>
+    <a href="resume/"><span data-ru="Резюме">Résumé</span></a>
+    <a href="writing/"><span data-ru="Статьи">Articles</span></a>
   </nav>
+  <div class="language" role="group" aria-label="Language" data-ru-label="Язык" hidden>
+    <button type="button" lang="en" data-language="en" aria-pressed="true">EN</button>
+    <button type="button" lang="ru" data-language="ru" aria-pressed="false">RU</button>
+  </div>
 </header>
 <div id="sky" aria-hidden="true"></div>
-<p class="tag" id="v-home">Mathematician. Astrophysicist. Programmer.</p>
 
+<script src="assets/language.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/TrackballControls.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/shaders/CopyShader.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/shaders/LuminosityHighPassShader.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/EffectComposer.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/RenderPass.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/ShaderPass.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/UnrealBloomPass.js"></script>
 <script src="assets/sky.js"></script>
 </body>
 </html>
