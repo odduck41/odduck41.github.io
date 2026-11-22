@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en" class="is-home">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Löva — Mathematician. Astrophysicist. Programmer.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+  --bg:#ffffff;--fg:#000000;--muted:#5f5f5f;--line:#d2d2d2;--panel:#f3f3f3;color-scheme:light;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){--bg:#000000;--fg:#ffffff;--muted:#9b9b9b;--line:#2b2b2b;--panel:#0c0c0c;color-scheme:dark}
+}
+:root[data-theme="dark"]{--bg:#000000;--fg:#ffffff;--muted:#9b9b9b;--line:#2b2b2b;--panel:#0c0c0c;color-scheme:dark}
+:root.is-home{--bg:#000000;--fg:#ffffff;--muted:#9b9b9b;--line:#2b2b2b;--panel:#0c0c0c;color-scheme:dark}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+html.is-home,html.is-home body{height:100%;overflow:hidden;overscroll-behavior:none;touch-action:none}
+body{margin:0;background:var(--bg);color:var(--fg);font:400 1.0625rem/1.65 Manrope,system-ui,-apple-system,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--bg);z-index:10}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--fg);outline-offset:4px;border-radius:6px}
+
+/* top bar: same on every page */
+.bar{position:fixed;top:0;left:0;right:0;z-index:20;display:flex;justify-content:space-between;align-items:center;gap:12px;padding:calc(16px + env(safe-area-inset-top,0px)) clamp(16px,4vw,48px) 14px}
+html:not(.is-home) .bar{background:var(--bg)}
+.mark{font:500 1.45rem Fraunces,Georgia,serif;letter-spacing:-.01em;text-decoration:none}
+.bar nav{display:flex;gap:8px}
+.bar nav a{text-decoration:none;font-weight:500;font-size:.95rem;padding:8px 18px;border:1px solid var(--fg);border-radius:999px;transition:background .2s,color .2s}
+.bar nav a:hover,.bar nav a[aria-current="page"]{background:var(--fg);color:var(--bg)}
+
+/* home: animation only */
+#sky{position:fixed;inset:0;background:#000}#sky canvas{display:block}
+html:not(.is-home) #sky{display:none}
+.tag{position:fixed;left:0;right:0;bottom:calc(26px + env(safe-area-inset-bottom,0px));text-align:center;margin:0;padding:0 16px;font:400 clamp(.95rem,2.6vw,1.3rem)/1.3 Fraunces,Georgia,serif;font-style:italic;color:var(--muted);pointer-events:none}
+
+/* inner pages */
+.page{max-width:1040px;margin:0 auto;padding:132px clamp(20px,5vw,64px) 96px}
+.page h1{margin:0 0 .3em;font:500 clamp(2.8rem,9vw,5.5rem)/1 Fraunces,Georgia,serif;letter-spacing:-.025em}
+.sub{margin:0 0 48px;color:var(--muted);max-width:36rem}
+
+.stage{perspective:1400px;width:min(540px,100%)}
+.card{position:relative;aspect-ratio:7/4;transform-style:preserve-3d;transition:transform .8s cubic-bezier(.2,.7,.2,1);cursor:pointer}
+.card.flipped{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;border-radius:18px;padding:clamp(18px,4vw,32px);background:var(--panel);border:1px solid var(--fg);backface-visibility:hidden;-webkit-backface-visibility:hidden;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden}
+.face.back{transform:rotateY(180deg)}
+.face .name{font:500 clamp(1.8rem,5vw,2.6rem)/1 Fraunces,Georgia,serif;letter-spacing:-.02em;margin:0}
+.face .roles{margin:.5em 0 0;color:var(--muted);font-size:.95rem;line-height:1.5}
+.face svg{position:absolute;right:-24px;bottom:-30px;width:64%;height:auto;pointer-events:none}
+.face ul{list-style:none;margin:0;padding:0;display:grid;gap:10px;font-size:clamp(.88rem,2.4vw,1rem)}
+.face li{display:flex;gap:14px;align-items:baseline}
+.face li span{color:var(--muted);width:5.2em;flex:none}
+.face li a{text-decoration:none;border-bottom:1px solid var(--muted);word-break:break-all}
+.flip{margin-top:20px;background:none;border:1px solid var(--fg);color:var(--fg);font:500 .95rem Manrope,system-ui,sans-serif;padding:8px 18px;border-radius:999px;cursor:pointer;transition:background .2s,color .2s}
+.flip:hover{background:var(--fg);color:var(--bg)}
+
+.grid{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:clamp(36px,6vw,80px)}
+ol.tl{list-style:none;margin:0;padding:0 0 0 28px;border-left:1px solid var(--muted)}
+ol.tl li{position:relative;padding-bottom:34px}
+ol.tl li:last-child{padding-bottom:0}
+ol.tl li::before{content:"";position:absolute;left:-34px;top:.62em;width:11px;height:11px;border-radius:50%;background:var(--bg);border:2px solid var(--fg)}
+ol.tl li.now::before{background:var(--fg)}
+.when{color:var(--muted);font-size:.9rem;margin:0}
+.tl h3{margin:2px 0 4px;font:500 1.35rem/1.25 Fraunces,Georgia,serif}
+.tl p{margin:0;color:var(--muted)}
+.side h3{margin:0 0 10px;font:500 1.25rem Fraunces,Georgia,serif}
+.side p{margin:0 0 30px}
+
+.posts{list-style:none;margin:0;padding:0}
+.posts li{display:grid;grid-template-columns:1fr auto;gap:4px 24px;padding:22px 0;border-top:1px solid var(--line)}
+.posts li:last-child{border-bottom:1px solid var(--line)}
+.posts h3{margin:0;font:500 clamp(1.2rem,3vw,1.55rem)/1.25 Fraunces,Georgia,serif}
+.posts .meta{color:var(--muted);font-size:.9rem;text-align:right;white-space:nowrap}
+.posts p{grid-column:1/-1;margin:0;color:var(--muted);font-size:.98rem}
+
+@keyframes in{from{opacity:0}to{opacity:1}}
+.page{animation:in .35s ease-out}
+@media (max-width:760px){.grid{grid-template-columns:1fr}}
+@media (max-width:420px){.bar nav a{padding:7px 13px;font-size:.88rem}.mark{font-size:1.25rem}}
+@media (prefers-reduced-motion:reduce){.card{transition:none}.page{animation:none}}
+</style>
+</head>
+<body>
+
+<header class="bar">
+  <a class="mark" href="#home">Löva</a>
+  <nav aria-label="Pages">
+    <a href="#card">Card</a>
+    <a href="#resume">Resume</a>
+    <a href="#writing">Writing</a>
+  </nav>
+</header>
+
+<div id="sky" aria-hidden="true"></div>
+<p class="tag" id="v-home">Mathematician. Astrophysicist. Programmer.</p>
+
+<main>
+  <div class="page" id="v-card" hidden>
+    <h1>Card</h1>
+    <p class="sub">Tap the card to turn it over.</p>
+    <div class="stage">
+      <div class="card" id="cardEl">
+        <div class="face front">
+          <div>
+            <p class="name">Löva</p>
+            <p class="roles">Mathematician. Astrophysicist. Programmer.<br>MSU Faculty of Space Research</p>
+          </div>
+          <svg viewBox="0 0 300 200" fill="none" stroke="currentColor" aria-hidden="true">
+            <ellipse cx="170" cy="120" rx="130" ry="16" stroke-width="1.2" opacity=".5"/>
+            <circle cx="170" cy="120" r="52" stroke-width="1.4" opacity=".35"/>
+            <circle cx="170" cy="120" r="40" fill="var(--panel)" stroke-width="2"/>
+            <path d="M40 120 Q170 140 300 120" stroke-width="1.6"/>
+          </svg>
+        </div>
+        <div class="face back" inert>
+          <p class="name" style="font-size:1.5rem">Say hello</p>
+          <ul>
+            <li><span>Email</span><a href="mailto:name@example.com">name@example.com</a></li>
+            <li><span>Telegram</span><a href="https://t.me/your_handle">t.me/your_handle</a></li>
+            <li><span>GitHub</span><a href="https://github.com/your-handle">github.com/your-handle</a></li>
+            <li><span>Codeforces</span><a href="https://codeforces.com/profile/your-handle">codeforces.com/your-handle</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <button class="flip" id="flipBtn" type="button">Flip card</button>
+  </div>
+
+  <div class="page" id="v-resume" hidden>
+    <h1>Resume</h1>
+    <p class="sub">The path so far, oldest first.</p>
+    <div class="grid">
+      <ol class="tl">
+        <li><p class="when">Grade 6</p><h3>Started Python</h3><p>Telegram bots, and the first spark of interest in machine learning.</p></li>
+        <li><p class="when">Grades 8–9</p><h3>Switched to C++</h3><p>Moved to a language where I can see what the machine is actually doing.</p></li>
+        <li><p class="when">Grades 10–11</p><h3>Kapitsa Phystech Lyceum, informatics track</h3><p>Twice a prizewinner of the regional informatics olympiad. In grade 11 it earned an olympiad admission benefit.</p></li>
+        <li><p class="when">2025</p><h3>Faculty of Space Research, Moscow State University</h3><p>Chose it over MIPT FALT for the more fundamental program: mathematics, physics, astrophysics and programming.</p></li>
+        <li class="now"><p class="when">Now, 2nd year</p><h3>Studying beyond the curriculum</h3><p>Math courses at the Independent University of Moscow and the Deep Learning School by MIPT. Building Echo of the Station, a co-op horror game on Roblox.</p></li>
+      </ol>
+      <div class="side">
+        <h3>Languages</h3><p>C++, Python</p>
+        <h3>Interests</h3><p>Competitive programming (ICPC, Codeforces), low-level systems, machine learning and data science, real analysis, celestial mechanics.</p>
+        <h3>Next</h3><p>Research internships, then a PhD where math, astronomy and code meet.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="page" id="v-writing" hidden>
+    <h1>Writing</h1>
+    <p class="sub">Nothing is published yet. These are the pieces I want to write.</p>
+    <ul class="posts">
+      <li><h3>Why the Lebesgue integral exists</h3><span class="meta">Math, planned</span><p>What Riemann’s integral can’t do, and what measure theory buys in exchange.</p></li>
+      <li><h3>Three bodies, no closed form</h3><span class="meta">Astrophysics, planned</span><p>Simulating orbits step by step, and why the errors matter more than the picture.</p></li>
+      <li><h3>From main() to the first instruction</h3><span class="meta">Code, planned</span><p>A walk through what happens before and after your program starts.</p></li>
+      <li><h3>A small neural network in plain C++</h3><span class="meta">Code, planned</span><p>No frameworks: forward pass, backprop and a training loop, written by hand.</p></li>
+    </ul>
+  </div>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/TrackballControls.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/shaders/CopyShader.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/shaders/LuminosityHighPassShader.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/EffectComposer.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/RenderPass.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/ShaderPass.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/UnrealBloomPass.js"></script>
+<script>
+(function(){
+  var root=document.documentElement,host=document.getElementById('sky');
+  var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var home=true,gl=null;
+
+  function initGL(){
+    if(!window.THREE||!THREE.EffectComposer||!THREE.TrackballControls||!THREE.UnrealBloomPass)return null;
+    var renderer;
+    try{renderer=new THREE.WebGLRenderer({antialias:false,powerPreference:'high-performance'});}catch(e){return null;}
+    var w=host.clientWidth||innerWidth,h=host.clientHeight||innerHeight;
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio||1,Math.min(w,h)<700?1.5:2));
+    renderer.setSize(w,h);renderer.setClearColor(0x000000,1);
+    host.appendChild(renderer.domElement);
+
+    var scene=new THREE.Scene(),camera=new THREE.PerspectiveCamera(55,w/h,.1,3000);
+    var tn=Math.tan(55*Math.PI/360),d0=Math.max(15,9.6/(tn*(w/h)));
+    camera.position.set(-.86*d0,.23*d0,.5*d0);
+
+    /* accretion disk */
+    var diskU={uT:{value:0}};
+    var disk=new THREE.Mesh(new THREE.RingGeometry(2.3,9.5,256,1),new THREE.ShaderMaterial({
+      uniforms:diskU,transparent:true,depthWrite:false,side:THREE.DoubleSide,blending:THREE.AdditiveBlending,
+      vertexShader:`
+        varying vec3 vLocal,vWorld,vVel;
+        void main(){
+          vLocal=position;
+          vec4 w=modelMatrix*vec4(position,1.);
+          vWorld=w.xyz;
+          vVel=normalize((modelMatrix*vec4(-position.y,position.x,0.,0.)).xyz);
+          gl_Position=projectionMatrix*viewMatrix*w;
+        }`,
+      fragmentShader:`
+        uniform float uT;
+        varying vec3 vLocal,vWorld,vVel;
+        const float RI=2.3,RO=9.5;
+        float hash3(vec3 p){p=fract(p*.3183099+.1);p*=17.;return fract(p.x*p.y*p.z*(p.x+p.y+p.z));}
+        float vn(vec3 x){
+          vec3 i=floor(x),f=fract(x);f=f*f*(3.-2.*f);
+          return mix(mix(mix(hash3(i),hash3(i+vec3(1,0,0)),f.x),mix(hash3(i+vec3(0,1,0)),hash3(i+vec3(1,1,0)),f.x),f.y),
+                     mix(mix(hash3(i+vec3(0,0,1)),hash3(i+vec3(1,0,1)),f.x),mix(hash3(i+vec3(0,1,1)),hash3(i+vec3(1,1,1)),f.x),f.y),f.z);
+        }
+        float fbm(vec3 p){float s=0.,a=.5;for(int i=0;i<4;i++){s+=a*vn(p);p=p*2.03+vec3(1.7,9.2,3.1);a*=.5;}return s;}
+        vec3 ramp(float t){
+          vec3 c=mix(vec3(1.,.93,.78),vec3(1.,.58,.18),smoothstep(0.,.3,t));
+          return mix(c,vec3(.55,.16,.05),smoothstep(.3,.9,t));
+        }
+        void main(){
+          float r=length(vLocal.xy);
+          float t=clamp((r-RI)/(RO-RI),0.,1.);
+          float ph=atan(vLocal.y,vLocal.x)-uT*1.4*pow(r,-.6);
+          vec3 p=vec3(cos(ph),sin(ph),0.)*r*.75+vec3(0.,0.,uT*.08);
+          float d=smoothstep(.25,.85,fbm(p))*(.65+.35*vn(vec3(r*4.,7.,uT*.05)));
+          float br=(.25+3.0*pow(1.-t,2.4))*(.35+1.4*d);
+          float beam=dot(normalize(vVel),normalize(cameraPosition-vWorld));
+          br*=clamp(1.+.85*beam,.25,2.);
+          float a=smoothstep(0.,.05,t)*(1.-smoothstep(.65,1.,t))*(.3+.7*d);
+          gl_FragColor=vec4(ramp(t)*br,a);
+        }`
+    }));
+    disk.rotation.x=-Math.PI/2;
+    var tiltG=new THREE.Group();tiltG.rotation.z=.12;tiltG.add(disk);scene.add(tiltG);
+
+    /* stars */
+    var N=32000,pos=new Float32Array(N*3),col=new Float32Array(N*3),sz=new Float32Array(N),tw=new Float32Array(N),i,u,a,s,R,k,b;
+    for(i=0;i<N;i++){
+      u=Math.random()*2-1;a=Math.random()*6.2832;s=Math.sqrt(1-u*u);R=600+Math.random()*600;
+      pos[i*3]=R*s*Math.cos(a);pos[i*3+1]=R*u;pos[i*3+2]=R*s*Math.sin(a);
+      k=Math.random();b=.25+Math.random()*.75;
+      col[i*3]=(k<.6?.9:k<.85?1:.6)*b;col[i*3+1]=(k<.6?.92:k<.85?.85:.75)*b;col[i*3+2]=(k<.6?1:k<.85?.65:1)*b;
+      sz[i]=.8+Math.random()*1.6;tw[i]=Math.random()*6.28;
+    }
+    var sg=new THREE.BufferGeometry();
+    sg.setAttribute('position',new THREE.BufferAttribute(pos,3));
+    sg.setAttribute('aCol',new THREE.BufferAttribute(col,3));
+    sg.setAttribute('aSize',new THREE.BufferAttribute(sz,1));
+    sg.setAttribute('aTw',new THREE.BufferAttribute(tw,1));
+    var starU={uT:{value:0},uPR:{value:renderer.getPixelRatio()}};
+    scene.add(new THREE.Points(sg,new THREE.ShaderMaterial({
+      uniforms:starU,transparent:true,depthWrite:false,blending:THREE.AdditiveBlending,
+      vertexShader:`
+        uniform float uT,uPR;attribute vec3 aCol;attribute float aSize,aTw;varying vec3 vC;
+        void main(){vC=aCol*(.55+.45*sin(uT*1.7+aTw));gl_PointSize=aSize*uPR;gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.);}`,
+      fragmentShader:`
+        varying vec3 vC;
+        void main(){float d=length(gl_PointCoord-.5);if(d>.5)discard;gl_FragColor=vec4(vC*(1.-d*1.6),1.);}`
+    })));
+
+    /* post: bloom, then gravitational lens + tone map */
+    var composer=new THREE.EffectComposer(renderer);
+    composer.addPass(new THREE.RenderPass(scene,camera));
+    var lens=new THREE.ShaderPass({
+      uniforms:{tDiffuse:{value:null},uE:{value:.13},uA:{value:w/h}},
+      vertexShader:'varying vec2 vUv;void main(){vUv=uv;gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.);}',
+      fragmentShader:`
+        uniform sampler2D tDiffuse;uniform float uE,uA;varying vec2 vUv;
+        void main(){
+          vec2 p=(vUv-.5)*vec2(uA,1.);
+          float th=length(p);
+          vec2 dir=p/max(th,1e-4);
+          float b=th-uE*uE/max(th,1e-3);
+          vec3 c=texture2D(tDiffuse,dir*b/vec2(uA,1.)+.5).rgb;
+          c*=smoothstep(uE*.86,uE*.9,th);
+          float q=(th-uE*.92)/(uE*.025);
+          c+=vec3(1.,.85,.6)*exp(-q*q)*.9;
+          gl_FragColor=vec4(c,1.);
+        }`
+    });
+    composer.addPass(lens);
+    composer.addPass(new THREE.UnrealBloomPass(new THREE.Vector2(w,h),.5,.25,.8));
+    var fin=new THREE.ShaderPass({
+      uniforms:{tDiffuse:{value:null},uE:{value:.13},uA:{value:w/h}},
+      vertexShader:'varying vec2 vUv;void main(){vUv=uv;gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.);}',
+      fragmentShader:`
+        uniform sampler2D tDiffuse;uniform float uE,uA;varying vec2 vUv;
+        float rnd(vec2 p){return fract(sin(dot(p,vec2(12.9898,78.233)))*43758.5453);}
+        void main(){
+          vec3 c=texture2D(tDiffuse,vUv).rgb;
+          float th=length((vUv-.5)*vec2(uA,1.));
+          c*=smoothstep(uE*.86,uE*.9,th);
+          c*=1.-.5*smoothstep(.35,.85,length(vUv-.5));
+          c=1.-exp(-c*1.15);
+          c=pow(c,vec3(1./2.2));
+          c+=(rnd(gl_FragCoord.xy)+rnd(gl_FragCoord.xy+17.)-1.)*1.5/255.;
+          gl_FragColor=vec4(c,1.);
+        }`
+    });
+    composer.addPass(fin);
+
+    var ctl=new THREE.TrackballControls(camera,renderer.domElement);
+    ctl.noPan=true;ctl.rotateSpeed=2.2;ctl.zoomSpeed=.8;ctl.staticMoving=false;ctl.dynamicDampingFactor=.07;
+    ctl.minDistance=8;ctl.maxDistance=50;ctl.keys=[-1,-1,-1];
+    var lastT=0,dragging=false,AX=new THREE.Vector3(0,1,0),dom=renderer.domElement;
+    dom.addEventListener('pointerdown',function(){dragging=true;});
+    window.addEventListener('pointerup',function(){dragging=false;});
+    window.addEventListener('pointercancel',function(){dragging=false;});
+    dom.addEventListener('dblclick',function(){ctl.reset();});
+
+    var clock=new THREE.Clock(),tanH=Math.tan(camera.fov*Math.PI/360);
+    return {
+      rs:function(){
+        var w2=host.clientWidth,h2=host.clientHeight;if(!w2||!h2)return;
+        renderer.setSize(w2,h2);composer.setSize(w2,h2);
+        camera.aspect=w2/h2;camera.updateProjectionMatrix();lens.uniforms.uA.value=w2/h2;fin.uniforms.uA.value=w2/h2;ctl.handleResize();
+      },
+      draw:function(){
+        var t=reduce?0:clock.getElapsedTime();
+        diskU.uT.value=t;starU.uT.value=t;
+        var dt=Math.min(.05,t-lastT);lastT=t;
+        if(!reduce&&!dragging){var da=.06*dt;camera.position.applyAxisAngle(AX,da);camera.up.applyAxisAngle(AX,da);}
+        ctl.update();
+        lens.uniforms.uE.value=(2/camera.position.length())/(2*tanH);fin.uniforms.uE.value=lens.uniforms.uE.value;
+        composer.render();
+      }
+    };
+  }
+
+  function loop(){requestAnimationFrame(loop);if(home&&gl)gl.draw();}
+
+  /* pages: one per hash */
+  var views=['home','card','resume','writing'],links=document.querySelectorAll('.bar nav a');
+  function route(){
+    var h=location.hash.replace('#','');if(views.indexOf(h)<0)h='home';
+    home=h==='home';root.classList.toggle('is-home',home);
+    views.forEach(function(v){if(v!=='home')document.getElementById('v-'+v).hidden=(v!==h);});
+    document.getElementById('v-home').hidden=!home;
+    [].forEach.call(links,function(a){if(a.getAttribute('href')==='#'+h)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current');});
+    window.scrollTo(0,0);
+    if(home&&gl)gl.rs();
+  }
+  window.addEventListener('hashchange',route);
+  window.addEventListener('resize',function(){if(home&&gl)gl.rs();});
+  try{gl=initGL();}catch(e){gl=null;}
+  route();
+  if(gl)requestAnimationFrame(loop);
+
+  /* card flip */
+  var card=document.getElementById('cardEl'),front=card.querySelector('.front'),back=card.querySelector('.back'),btn=document.getElementById('flipBtn');
+  function flip(){
+    var f=card.classList.toggle('flipped');
+    if(f){back.removeAttribute('inert');front.setAttribute('inert','');}
+    else{front.removeAttribute('inert');back.setAttribute('inert','');}
+    btn.textContent=f?'Show front':'Flip card';
+  }
+  card.addEventListener('click',function(e){if(!e.target.closest('a'))flip();});
+  btn.addEventListener('click',flip);
+})();
+</script>
+</body>
+</html>
